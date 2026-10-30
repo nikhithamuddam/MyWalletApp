@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campus Wallet | Student Budget Tracker</title>
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--text:#182230;--muted:#687386;--line:#e7ebf2;--purple:#635bff;--purple2:#eeeefe;--green:#138a62;--red:#d9485f;--shadow:0 8px 28px rgba(28,39,60,.06)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text)}
+.app{max-width:1180px;margin:auto;padding:28px 22px 40px}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:26px}.brand{display:flex;align-items:center;gap:12px}.logo{width:46px;height:46px;background:var(--purple);color:white;border-radius:14px;display:grid;place-items:center;font-size:23px;box-shadow:0 8px 18px #635bff40}.brand h1{font-size:22px;margin:0;letter-spacing:-.5px}.brand p{margin:3px 0 0;color:var(--muted);font-size:13px}.month{border:1px solid var(--line);background:white;border-radius:12px;padding:11px 13px;color:var(--text);font-weight:600}
+.hero{background:linear-gradient(115deg,#5148e5,#7b74ff);color:#fff;border-radius:24px;padding:28px 30px;display:grid;grid-template-columns:1.25fr .75fr;gap:24px;align-items:center;box-shadow:0 14px 30px #635bff22}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:1.3px;opacity:.82;font-weight:700}.hero h2{font-size:clamp(25px,3vw,36px);margin:9px 0 7px;letter-spacing:-1px}.hero p{margin:0;opacity:.83;line-height:1.5}.budget-number{font-size:clamp(30px,4vw,43px);font-weight:800;letter-spacing:-1.4px;margin:17px 0 14px}.progress-wrap{max-width:480px}.progress-meta{display:flex;justify-content:space-between;font-size:12px;margin-bottom:8px;opacity:.9}.progress{height:9px;background:#ffffff48;border-radius:99px;overflow:hidden}.progress span{display:block;height:100%;width:0;background:#fff;border-radius:99px;transition:width .3s}.hero-side{border-left:1px solid #ffffff42;padding-left:25px}.hero-side .small{font-size:13px;opacity:.8}.hero-side .amount{font-size:24px;font-weight:750;margin:7px 0 17px}.hero-side button{background:#fff;color:#5148e5;border:0;padding:11px 15px;border-radius:11px;font-weight:750;cursor:pointer}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:20px 0}.stat,.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}.stat{padding:19px 20px}.stat-head{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:13px;font-weight:600}.stat-icon{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;font-size:17px;background:#f0efff}.stat strong{display:block;font-size:25px;letter-spacing:-.6px;margin:12px 0 4px}.stat small{color:var(--muted);font-size:12px}.layout{display:grid;grid-template-columns:1.05fr .95fr;gap:18px}.panel{padding:22px;margin-bottom:18px}.panel-title{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}.panel-title h3{font-size:17px;margin:0;letter-spacing:-.3px}.panel-title span{color:var(--muted);font-size:12px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field{display:flex;flex-direction:column;gap:7px}.field.full{grid-column:1/-1}label{font-size:12px;color:#596579;font-weight:700}input,select{width:100%;border:1px solid #dfe4ed;background:#fff;padding:12px 12px;border-radius:10px;font:inherit;font-size:14px;color:var(--text);outline:none}input:focus,select:focus{border-color:var(--purple);box-shadow:0 0 0 3px #635bff17}.btn{border:0;border-radius:11px;padding:12px 15px;font-weight:750;font-size:13px;cursor:pointer;transition:transform .15s,opacity .15s}.btn:hover{transform:translateY(-1px)}.primary{background:var(--purple);color:white}.soft{background:var(--purple2);color:var(--purple)}.danger{background:#fff0f1;color:var(--red)}.fullbtn{width:100%;margin-top:15px}.transactions{display:flex;flex-direction:column;gap:0}.tx{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}.tx:last-child{border-bottom:0;padding-bottom:0}.tx-icon{width:42px;height:42px;border-radius:13px;background:#f1f3f8;display:grid;place-items:center;font-size:19px;flex-shrink:0}.tx-main{flex:1;min-width:0}.tx-main strong{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tx-main small{display:block;color:var(--muted);font-size:11px;margin-top:4px}.tx-right{text-align:right}.tx-right strong{display:block;font-size:14px}.tx-right small{color:var(--muted);font-size:11px}.minus{color:var(--red)}.plus{color:var(--green)}.empty{padding:24px 8px;text-align:center;color:var(--muted);font-size:13px}.empty b{display:block;color:var(--text);margin-bottom:5px}.category-list{display:flex;flex-direction:column;gap:16px}.cat-row{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center}.cat-icon{height:34px;width:34px;background:#f4f5fa;border-radius:10px;display:grid;place-items:center}.cat-info strong{font-size:12px;display:block}.cat-info small{font-size:11px;color:var(--muted)}.cat-track{height:6px;background:#edf0f5;border-radius:99px;margin-top:7px;overflow:hidden}.cat-track span{height:100%;display:block;background:var(--purple);border-radius:99px}.cat-amount{font-size:12px;font-weight:750}.tips{background:#f5f4ff;border:1px solid #e8e6ff;border-radius:14px;padding:15px;margin-top:16px}.tips strong{font-size:13px;display:block;margin-bottom:5px}.tips p{font-size:12px;color:#5f5a83;line-height:1.5;margin:0}.footer{text-align:center;color:#8b94a4;font-size:11px;margin-top:8px}.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#172033;color:#fff;padding:12px 18px;border-radius:12px;font-size:13px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .2s}.toast.show{opacity:1}.modal-back{position:fixed;inset:0;background:#11182766;display:none;align-items:center;justify-content:center;padding:20px}.modal-back.open{display:flex}.modal{background:white;border-radius:20px;padding:24px;width:min(100%,410px);box-shadow:0 20px 60px #0002}.modal h3{margin:0 0 7px}.modal p{color:var(--muted);font-size:13px;margin:0 0 18px}.modal-actions{display:flex;gap:10px;margin-top:17px}.modal-actions button{flex:1}
+@media(max-width:800px){.hero{grid-template-columns:1fr}.hero-side{border-left:0;border-top:1px solid #ffffff42;padding:18px 0 0}.stats{grid-template-columns:1fr}.layout{grid-template-columns:1fr}.top{align-items:flex-start}.app{padding:18px 13px}.hero{padding:23px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="brand"><div class="logo">◈</div><div><h1>Campus Wallet</h1><p>Your money, made manageable.</p></div></div>
+    <select class="month" id="period" aria-label="Budget period"><option value="month">This month</option><option value="week">This week</option><option value="all">All time</option></select>
+  </header>
+  <section class="hero">
+    <div><div class="eyebrow">Available budget</div><h2>Spend smart. Stress less.</h2><p>Small steps today make a better student budget tomorrow.</p><div class="budget-number" id="remaining">$450.00</div><div class="progress-wrap"><div class="progress-meta"><span id="spentLabel">$0 spent</span><span id="budgetLabel">$600 budget</span></div><div class="progress"><span id="budgetProgress"></span></div></div></div>
+    <div class="hero-side"><div class="small">Your monthly budget</div><div class="amount" id="heroBudget">$600.00</div><button id="editBudget">✎ Edit budget</button></div>
+  </section>
+  <section class="stats">
+    <div class="stat"><div class="stat-head"><span>Total spent</span><span class="stat-icon">↗</span></div><strong id="totalSpent">$0.00</strong><small id="spentNote">Start by adding an expense</small></div>
+    <div class="stat"><div class="stat-head"><span>Income / added money</span><span class="stat-icon">＋</span></div><strong id="totalIncome">$0.00</strong><small>Money you have recorded as income</small></div>
+    <div class="stat"><div class="stat-head"><span>Daily spending average</span><span class="stat-icon">◷</span></div><strong id="dailyAvg">$0.00</strong><small>Based on your selected period</small></div>
+  </section>
+  <div class="layout">
+    <div>
+      <section class="panel">
+        <div class="panel-title"><h3>Add a transaction</h3><span>Quick entry</span></div>
+        <form id="txForm">
+          <div class="form-grid">
+            <div class="field"><label for="type">Transaction type</label><select id="type"><option value="expense">Expense</option><option value="income">Income / money added</option></select></div>
+            <div class="field"><label for="amount">Amount ($)</label><input id="amount" type="number" min="0.01" step="0.01" placeholder="e.g. 18.50" required></div>
+            <div class="field"><label for="category">Category</label><select id="category"><option>Food</option><option>Groceries</option><option>Transport</option><option>Rent & Bills</option><option>Books & Supplies</option><option>Shopping</option><option>Entertainment</option><option>Health</option><option>Income</option><option>Other</option></select></div>
+            <div class="field"><label for="date">Date</label><input id="date" type="date" required></div>
+            <div class="field full"><label for="description">Description</label><input id="description" type="text" maxlength="70" placeholder="e.g. Lunch at campus cafe"></div>
+          </div>
+          <button class="btn primary fullbtn" type="submit">＋ Add transaction</button>
+        </form>
+      </section>
+      <section class="panel">
+        <div class="panel-title"><h3>Recent transactions</h3><button class="btn soft" id="clearAll" type="button">Clear all</button></div>
+        <div id="transactionList" class="transactions"><div class="empty"><b>No transactions yet</b>Add your first expense or income above.</div></div>
+      </section>
+    </div>
+    <div>
+      <section class="panel">
+        <div class="panel-title"><h3>Spending by category</h3><span id="categoryPeriod">This month</span></div>
+        <div id="categoryList" class="category-list"><div class="empty">Your category breakdown will appear here.</div></div>
+      </section>
+      <section class="panel">
+        <div class="panel-title"><h3>Student money tip</h3><span>✦ Smart habit</span></div>
+        <div class="tips"><strong id="tipTitle">Try the 50/30/20 rule</strong><p id="tipText">A simple starting point: plan for needs, wants, and savings. Adjust the split to fit your student life and actual costs.</p></div>
+        <div style="margin-top:16px;display:flex;gap:9px;flex-wrap:wrap"><button class="btn soft" id="nextTip" type="button">Next tip →</button><button class="btn soft" id="exportCsv" type="button">Export CSV ↓</button></div>
+      </section>
+      <section class="panel">
+        <div class="panel-title"><h3>Budget settings</h3><span>Personalize</span></div>
+        <div class="field"><label for="budgetInput">Monthly budget ($)</label><input id="budgetInput" type="number" min="0" step="0.01" value="600"></div>
+        <button class="btn primary fullbtn" id="saveBudget" type="button">Save monthly budget</button>
+      </section>
+    </div>
+  </div>
+  <div class="footer">Campus Wallet · A student budgeting demo · Data is saved only in this browser on this device.</div>
+</div>
+<div class="toast" id="toast"></div>
+<div class="modal-back" id="budgetModal"><div class="modal"><h3>Update your monthly budget</h3><p>Choose the total amount you want to plan for this month.</p><div class="field"><label for="modalBudget">Monthly budget ($)</label><input id="modalBudget" type="number" min="0" step="0.01" value="600"></div><div class="modal-actions"><button class="btn soft" id="cancelModal">Cancel</button><button class="btn primary" id="confirmBudget">Save budget</button></div></div></div>
+<script>
+const $ = id => document.getElementById(id);
+const today = new Date();
+const isoToday = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+$('date').value = isoToday;
+const icons = {'Food':'🍔','Groceries':'🛒','Transport':'🚌','Rent & Bills':'🏠','Books & Supplies':'📚','Shopping':'🛍️','Entertainment':'🎬','Health':'💊','Income':'💵','Other':'📌'};
+const tips = [
+['Try the 50/30/20 rule','A simple starting point: plan for needs, wants, and savings. Adjust the split to fit your student life and actual costs.'],
+['Plan meals before shopping','A short grocery list can reduce impulse buys and help you avoid paying for food you do not use.'],
+['Review small purchases','Coffee, snacks, and convenience purchases add up. Track them for a week before deciding what to change.'],
+['Use student discounts','Before paying full price, check whether your campus, transit provider, or favorite service offers a student rate.'],
+['Save a small amount first','Even a small, consistent savings target can build the habit. Keep essential bills covered first.']
+];
+let tipIndex=0;
+let state={budget:600,transactions:[]};
+try{const saved=JSON.parse(localStorage.getItem('campusWalletData')||'null');if(saved&&typeof saved==='object'){state.budget=Number(saved.budget)||600;state.transactions=Array.isArray(saved.transactions)?saved.transactions:[];}}catch(e){}
+function persist(){localStorage.setItem('campusWalletData',JSON.stringify(state));}
+function money(n){return new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(n||0);}
+function parseDate(s){return new Date((s||isoToday)+'T12:00:00');}
+function withinPeriod(date,period){const d=parseDate(date),now=parseDate(isoToday);if(period==='all')return true;if(period==='week'){const start=new Date(now);start.setDate(now.getDate()-now.getDay());return d>=start&&d<=now;}return d.getFullYear()===now.getFullYear()&&d.getMonth()===now.getMonth();}
+function currentTransactions(){return state.transactions.filter(t=>withinPeriod(t.date,$('period').value));}
+function showToast(msg){$('toast').textContent=msg;$('toast').classList.add('show');clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>$('toast').classList.remove('show'),2200);}
+function render(){
+ const txs=currentTransactions(),expenses=txs.filter(t=>t.type==='expense'),income=txs.filter(t=>t.type==='income');
+ const spent=expenses.reduce((a,t)=>a+t.amount,0),earned=income.reduce((a,t)=>a+t.amount,0),remaining=state.budget-spent;
+ $('remaining').textContent=money(remaining);$('remaining').style.color=remaining<0?'#ffe0e4':'#fff';
+ $('heroBudget').textContent=money(state.budget);$('budgetLabel').textContent=money(state.budget)+' budget';$('spentLabel').textContent=money(spent)+' spent';
+ $('budgetProgress').style.width=Math.min(state.budget>0?spent/state.budget*100:spent>0?100:0,100)+'%';
+ $('totalSpent').textContent=money(spent);$('totalIncome').textContent=money(earned);
+ const days=$('period').value==='week'?Math.max(1,Math.ceil((today.getDay()+1))):$('period').value==='all'?Math.max(1,Math.ceil((today-new Date(today.getFullYear(),0,1))/86400000)+1):today.getDate();
+ $('dailyAvg').textContent=money(spent/days);$('spentNote').textContent=spent>state.budget?'Over budget by '+money(spent-state.budget):spent===0?'Start by adding an expense':Math.round((state.budget-spent)/Math.max(state.budget,1)*100)+'% of budget remains';
+ $('budgetInput').value=state.budget;$('modalBudget').value=state.budget;
+ const sorted=[...txs].sort((a,b)=>b.date.localeCompare(a.date)||b.createdAt-a.createdAt);
+ $('transactionList').innerHTML=sorted.length?sorted.slice(0,12).map(t=>`<div class="tx"><div class="tx-icon">${icons[t.category]||'📌'}</div><div class="tx-main"><strong>${escapeHtml(t.description||t.category)}</strong><small>${escapeHtml(t.category)} · ${formatDate(t.date)}</small></div><div class="tx-right"><strong class="${t.type==='income'?'plus':'minus'}">${t.type==='income'?'+':'−'}${money(t.amount)}</strong><small>${t.type==='income'?'Income':'Expense'}</small></div><button class="btn danger" style="padding:7px 9px;margin-left:3px" aria-label="Delete transaction" onclick="deleteTransaction('${t.id}')">×</button></div>`).join(''):'<div class="empty"><b>No transactions for this period</b>Add an expense or income above.</div>';
+ const totals={};expenses.forEach(t=>totals[t.category]=(totals[t.category]||0)+t.amount);
+ const cats=Object.entries(totals).sort((a,b)=>b[1]-a[1]),max=cats.length?cats[0][1]:0;
+ $('categoryList').innerHTML=cats.length?cats.map(([cat,amt])=>`<div class="cat-row"><div class="cat-icon">${icons[cat]||'📌'}</div><div class="cat-info"><strong>${escapeHtml(cat)}</strong><div class="cat-track"><span style="width:${max?amt/max*100:0}%"></span></div></div><div class="cat-amount">${money(amt)}</div></div>`).join(''):'<div class="empty">No expenses to break down yet.</div>';
+ $('categoryPeriod').textContent=$('period').selectedOptions[0].text;
+ $('budgetProgress').style.background=spent>state.budget?'#ffccd2':'#fff';
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function formatDate(s){return parseDate(s).toLocaleDateString('en-US',{month:'short',day:'numeric'});}
+function deleteTransaction(id){state.transactions=state.transactions.filter(t=>t.id!==id);persist();render();showToast('Transaction deleted.');}
+$('txForm').addEventListener('submit',e=>{e.preventDefault();const amount=Number($('amount').value);if(!Number.isFinite(amount)||amount<=0){showToast('Enter an amount greater than zero.');return;}const type=$('type').value;let category=$('category').value;if(type==='income'&&category==='Food')category='Income';state.transactions.push({id:(crypto.randomUUID?crypto.randomUUID():String(Date.now()+Math.random())),type,amount:Math.round(amount*100)/100,category,date:$('date').value||isoToday,description:$('description').value.trim()||(type==='income'?'Money added':category),createdAt:Date.now()});persist();$('amount').value='';$('description').value='';render();showToast(type==='income'?'Income added.':'Expense added.');});
+$('type').addEventListener('change',()=>{if($('type').value==='income')$('category').value='Income';else if($('category').value==='Income')$('category').value='Food';});
+$('period').addEventListener('change',render);
+function saveBudget(){const n=Number($('budgetInput').value);if(!Number.isFinite(n)||n<0){showToast('Enter a valid budget.');return;}state.budget=Math.round(n*100)/100;persist();render();$('budgetModal').classList.remove('open');showToast('Monthly budget saved.');}
+$('saveBudget').addEventListener('click',saveBudget);$('editBudget').addEventListener('click',()=>{$('modalBudget').value=state.budget;$('budgetModal').classList.add('open');});$('cancelModal').addEventListener('click',()=>$('budgetModal').classList.remove('open'));$('confirmBudget').addEventListener('click',()=>{$('budgetInput').value=$('modalBudget').value;saveBudget();});$('budgetModal').addEventListener('click',e=>{if(e.target===$('budgetModal'))$('budgetModal').classList.remove('open');});
+$('clearAll').addEventListener('click',()=>{if(!state.transactions.length){showToast('There are no transactions to clear.');return;}if(confirm('Delete all transactions? This cannot be undone.')){state.transactions=[];persist();render();showToast('All transactions cleared.');}});
+$('nextTip').addEventListener('click',()=>{tipIndex=(tipIndex+1)%tips.length;$('tipTitle').textContent=tips[tipIndex][0];$('tipText').textContent=tips[tipIndex][1];});
+$('exportCsv').addEventListener('click',()=>{if(!state.transactions.length){showToast('Add a transaction before exporting.');return;}const rows=[['Date','Type','Category','Description','Amount'],...state.transactions.map(t=>[t.date,t.type,t.category,t.description,t.amount.toFixed(2)])];const csv=rows.map(row=>row.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\r\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='campus-wallet-transactions.csv';a.click();URL.revokeObjectURL(url);showToast('CSV export downloaded.');});
+render();
+</script>
+</body>
+</html>
